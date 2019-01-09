@@ -16,12 +16,12 @@ import java.util.List;
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
     Long id;
     String name;
     String email;
     @Embedded
     Location location;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "shop_id")
-    List<Shop> favoriteShops = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    List<LikeStateShop> likes = new ArrayList<>();
 }

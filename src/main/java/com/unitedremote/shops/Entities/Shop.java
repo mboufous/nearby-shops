@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,5 +20,7 @@ class Shop implements Serializable {
     String name;
     @Embedded
     Location location;
+    @OneToMany(mappedBy = "shop")
+    List<LikeStateShop> likes;
 
 }
