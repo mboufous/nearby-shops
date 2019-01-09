@@ -1,4 +1,4 @@
-package com.unitedremote.shops.Entities;
+package com.unitedremote.shops.DAO.Entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
 @NoArgsConstructor
 @ToString
 @Embeddable
-class Location {
+public class Location {
     Double lat;
     Double lon;
 }

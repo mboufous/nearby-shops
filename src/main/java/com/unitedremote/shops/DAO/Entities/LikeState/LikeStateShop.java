@@ -1,5 +1,7 @@
-package com.unitedremote.shops.Entities;
+package com.unitedremote.shops.DAO.Entities.LikeState;
 
+import com.unitedremote.shops.DAO.Entities.Shop;
+import com.unitedremote.shops.DAO.Entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +13,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-class LikeStateShop implements Serializable {
+public class LikeStateShop implements Serializable {
     @EmbeddedId
     LikeStateShopPrimaryKey id;
 

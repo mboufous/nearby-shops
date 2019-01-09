@@ -1,4 +1,4 @@
-package com.unitedremote.shops.Entities;
+package com.unitedremote.shops.DAO.Entities.LikeState;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,5 +1,6 @@
-package com.unitedremote.shops.Entities;
+package com.unitedremote.shops.DAO.Entities;
 
+import com.unitedremote.shops.DAO.Entities.LikeState.LikeStateShop;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-class Shop implements Serializable {
+public class Shop implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "shop_id")
