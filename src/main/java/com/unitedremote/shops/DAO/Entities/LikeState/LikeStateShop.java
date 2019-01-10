@@ -2,9 +2,7 @@ package com.unitedremote.shops.DAO.Entities.LikeState;
 
 import com.unitedremote.shops.DAO.Entities.Shop;
 import com.unitedremote.shops.DAO.Entities.User;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,9 +11,11 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@ToString
 public class LikeStateShop implements Serializable {
     @EmbeddedId
-    LikeStateShopPrimaryKey id;
+    LikeStateShopPrimaryKey id ;
 
     @ManyToOne
     @MapsId("user_id")

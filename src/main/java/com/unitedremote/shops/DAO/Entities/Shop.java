@@ -16,12 +16,12 @@ import java.util.List;
 public class Shop implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "shop_id")
     Long id;
     String name;
     @Embedded
     Location location;
     @OneToMany(mappedBy = "shop")
+    @ToString.Exclude
     List<LikeStateShop> likes;
 
 }
