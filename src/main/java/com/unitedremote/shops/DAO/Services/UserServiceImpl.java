@@ -73,11 +73,11 @@ public class UserServiceImpl implements IUserService, ILikeStateService {
 
     @Override
     public List<Shop> getLikedShops(Long userId) {
-        return likeRepository.findShopByUserIdAndLikeState(userId, LikeStateEnum.Like);
+        return shopRepository.findShopByUserIdAndLikeState(userId, LikeStateEnum.Like);
     }
 
     @Override
     public List<Shop> getDislikedShops(Long userId) {
-        return likeRepository.findShopByUserIdAndLikeState(userId, LikeStateEnum.Dislike);
+        return shopRepository.findShopByUserIdAndLikeState(userId, LikeStateEnum.Dislike);
     }
 }

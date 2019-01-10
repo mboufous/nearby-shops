@@ -1,5 +1,6 @@
 package com.unitedremote.shops.DAO.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.unitedremote.shops.DAO.Entities.LikeState.LikeStateShop;
 import lombok.*;
 
@@ -24,5 +25,6 @@ public class User implements Serializable {
     Location location;
     @OneToMany(mappedBy = "user")
     @ToString.Exclude
+    @JsonIgnore
     List<LikeStateShop> likes = new ArrayList<>();
 }

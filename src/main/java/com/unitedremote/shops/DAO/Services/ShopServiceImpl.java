@@ -2,6 +2,7 @@ package com.unitedremote.shops.DAO.Services;
 
 import com.unitedremote.shops.DAO.Entities.LikeState.LikeStateEnum;
 import com.unitedremote.shops.DAO.Entities.Shop;
+import com.unitedremote.shops.DAO.Repositories.LikeStateShopRepository;
 import com.unitedremote.shops.DAO.Repositories.ShopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,10 +15,12 @@ public class ShopServiceImpl implements IShopService{
 
     @Autowired
     ShopRepository shopRepository;
+    @Autowired
+    LikeStateShopRepository likeStateShopRepository;
 
     @Override
-    public Shop findShopByName(String keyword) {
-        return shopRepository.findByNameContains(keyword).get();
+    public List<Shop> findShopByName(String keyword) {
+        return shopRepository.findByNameContainingIgnoreCase(keyword);
     }
 
     @Override
@@ -31,13 +34,13 @@ public class ShopServiceImpl implements IShopService{
     }
 
     @Override
-    public Integer getLikesCount(Long id) {
-        return shopRepository.findAllByIdAndLikesEquals(id, LikeStateEnum.Like);
+    public Long getLikesCount(Long id) {
+        return likeStateShopRepository.countByShopIdAndLikeState(id, LikeStateEnum.Like);
     }
 
     @Override
-    public Integer getDislikesCount(Long id) {
-        return shopRepository.findAllByIdAndLikesEquals(id, LikeStateEnum.Dislike);
+    public Long getDislikesCount(Long id) {
+        return likeStateShopRepository.countByShopIdAndLikeState(id, LikeStateEnum.Dislike);
     }
 
     @Override
