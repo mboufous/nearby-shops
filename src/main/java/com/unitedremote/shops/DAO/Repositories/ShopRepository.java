@@ -19,4 +19,5 @@ public interface ShopRepository extends JpaRepository<Shop, Long> {
     @Query(value = "SELECT s FROM Shop s where s.id not in (select l.shop.id from LikeStateShop l where l.user.id=?1 and l.likeState = ?2) ")
     List<Shop> findShopsNotCurrentLikeState(Long userId, LikeStateEnum currentLikeState);
 
+
 }

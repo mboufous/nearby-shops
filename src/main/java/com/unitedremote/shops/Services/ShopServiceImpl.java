@@ -3,6 +3,7 @@ package com.unitedremote.shops.Services;
 import com.unitedremote.shops.DAO.Entities.LikeState.LikeStateEnum;
 import com.unitedremote.shops.DAO.Entities.LikeState.LikeStateShop;
 import com.unitedremote.shops.DAO.Entities.LikeState.LikeStateShopPrimaryKey;
+import com.unitedremote.shops.DAO.Entities.Location;
 import com.unitedremote.shops.DAO.Entities.Shop;
 import com.unitedremote.shops.DAO.Repositories.LikeStateShopRepository;
 import com.unitedremote.shops.DAO.Repositories.ShopRepository;
@@ -42,7 +43,6 @@ public class ShopServiceImpl implements IShopService{
     public void deleteShop(Long id) {
         shopRepository.deleteById(id);
     }
-
 
 
 }

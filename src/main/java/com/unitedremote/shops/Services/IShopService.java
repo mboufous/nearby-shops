@@ -15,4 +15,5 @@ public interface IShopService {
     Shop save(Shop shop);
 
     void deleteShop(Long id);
+
 }

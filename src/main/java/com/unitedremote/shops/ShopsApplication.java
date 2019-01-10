@@ -7,10 +7,7 @@ import com.unitedremote.shops.DAO.Entities.User;
 import com.unitedremote.shops.DAO.Repositories.LikeStateShopRepository;
 import com.unitedremote.shops.DAO.Repositories.ShopRepository;
 import com.unitedremote.shops.DAO.Repositories.UserRepository;
-import com.unitedremote.shops.Services.ILikeStateService;
-import com.unitedremote.shops.Services.IShopService;
-import com.unitedremote.shops.Services.IUserService;
-import com.unitedremote.shops.Services.UserServiceImpl;
+import com.unitedremote.shops.Services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -34,7 +31,7 @@ public class ShopsApplication {
 
     @Bean
     public CommandLineRunner initApp(UserRepository userRepository, ShopRepository shopRepository, LikeStateShopRepository likeStateShopRepository,
-                                     IShopService shopService, IUserService userService, ILikeStateService likeStateService) {
+                                     IShopService shopService, IUserService userService, ILikeStateService likeStateService, INearbyShopsService nearbyShopsService) {
         return args -> {
             Stream.of("Mohamed", "Nihal", "Otmane", "Moustafa")
                     .forEach(userName -> userRepository.save(User.builder()
@@ -52,15 +49,16 @@ public class ShopsApplication {
                             .location(new Location(random.nextInt(100) + Math.random(), random.nextInt(100) + Math.random()))
                             .build()));
 
-            userRepository.findAll().forEach(System.out::println);
-            shopRepository.findAll().forEach(System.out::println);
-
-            likeStateService.likeShop(1L, 5L);
-            likeStateService.likeShop(2L, 5L);
-            likeStateService.likeShop(3L, 5L);
-            likeStateService.likeShop(1L, 6L);
-            likeStateService.dislikeShop(1L, 7L);
-            likeStateService.likeShop(2L, 5L);
+//            userRepository.findAll().forEach(System.out::println);
+//            shopRepository.findAll().forEach(System.out::println);
+//
+//            likeStateService.likeShop(1L, 5L);
+//            likeStateService.likeShop(2L, 5L);
+//            likeStateService.likeShop(3L, 5L);
+//            likeStateService.likeShop(1L, 6L);
+//            likeStateService.dislikeShop(1L, 7L);
+//            likeStateService.likeShop(2L, 5L);
+//            System.out.println(nearbyShopsService.getNearbyShops(2L));
 
 
 
