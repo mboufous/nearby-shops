@@ -1,6 +1,8 @@
 package com.unitedremote.shops.Services;
 
 import com.unitedremote.shops.DAO.Entities.LikeState.LikeStateEnum;
+import com.unitedremote.shops.DAO.Entities.LikeState.LikeStateShop;
+import com.unitedremote.shops.DAO.Entities.LikeState.LikeStateShopPrimaryKey;
 import com.unitedremote.shops.DAO.Entities.Shop;
 import com.unitedremote.shops.DAO.Repositories.LikeStateShopRepository;
 import com.unitedremote.shops.DAO.Repositories.ShopRepository;
@@ -15,8 +17,6 @@ public class ShopServiceImpl implements IShopService{
 
     @Autowired
     ShopRepository shopRepository;
-    @Autowired
-    LikeStateShopRepository likeStateShopRepository;
 
     @Override
     public List<Shop> findShopByName(String keyword) {
@@ -34,16 +34,6 @@ public class ShopServiceImpl implements IShopService{
     }
 
     @Override
-    public Long getLikesCount(Long id) {
-        return likeStateShopRepository.countByShopIdAndLikeState(id, LikeStateEnum.Like);
-    }
-
-    @Override
-    public Long getDislikesCount(Long id) {
-        return likeStateShopRepository.countByShopIdAndLikeState(id, LikeStateEnum.Dislike);
-    }
-
-    @Override
     public Shop save(Shop shop) {
         return shopRepository.save(shop);
     }
@@ -52,4 +42,7 @@ public class ShopServiceImpl implements IShopService{
     public void deleteShop(Long id) {
         shopRepository.deleteById(id);
     }
+
+
+
 }

@@ -1,12 +1,15 @@
 package com.unitedremote.shops;
 
+import com.unitedremote.shops.DAO.Entities.LikeState.LikeStateEnum;
 import com.unitedremote.shops.DAO.Entities.Location;
 import com.unitedremote.shops.DAO.Entities.Shop;
 import com.unitedremote.shops.DAO.Entities.User;
 import com.unitedremote.shops.DAO.Repositories.LikeStateShopRepository;
 import com.unitedremote.shops.DAO.Repositories.ShopRepository;
 import com.unitedremote.shops.DAO.Repositories.UserRepository;
+import com.unitedremote.shops.Services.ILikeStateService;
 import com.unitedremote.shops.Services.IShopService;
+import com.unitedremote.shops.Services.IUserService;
 import com.unitedremote.shops.Services.UserServiceImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -31,7 +34,7 @@ public class ShopsApplication {
 
     @Bean
     public CommandLineRunner initApp(UserRepository userRepository, ShopRepository shopRepository, LikeStateShopRepository likeStateShopRepository,
-                                     IShopService shopService, UserServiceImpl userService) {
+                                     IShopService shopService, IUserService userService, ILikeStateService likeStateService) {
         return args -> {
             Stream.of("Mohamed", "Nihal", "Otmane", "Moustafa")
                     .forEach(userName -> userRepository.save(User.builder()
@@ -52,19 +55,13 @@ public class ShopsApplication {
             userRepository.findAll().forEach(System.out::println);
             shopRepository.findAll().forEach(System.out::println);
 
-//            userService.likeShop(1L, 5L);
-//            userService.likeShop(2L, 5L);
-//            userService.likeShop(3L, 5L);
-//            userService.likeShop(1L, 6L);
-//            userService.dislikeShop(1L, 7L);
-//            userService.likeShop(2L, 5L);
-//
-//            System.out.println(shopService.getLikesCount(5L));
-//            System.out.println(shopService.getLikesCount(6L));
-//            System.out.println(shopService.getLikesCount(7L));
-//            System.out.println(shopService.getDislikesCount(7L));
-//
-//            System.out.println(shopRepository.findByNameContainingIgnoreCase("M"));
+            likeStateService.likeShop(1L, 5L);
+            likeStateService.likeShop(2L, 5L);
+            likeStateService.likeShop(3L, 5L);
+            likeStateService.likeShop(1L, 6L);
+            likeStateService.dislikeShop(1L, 7L);
+            likeStateService.likeShop(2L, 5L);
+
 
 
 

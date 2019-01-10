@@ -16,4 +16,8 @@ public interface ILikeStateService {
 
     List<Shop> getNotLikedShops(Long userId);
 
+    Long getLikesCount(Long shopId);
+
+    Long getDislikesCount(Long shopId);
+
 }

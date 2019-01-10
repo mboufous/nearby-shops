@@ -36,7 +36,6 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody LoginRequest data) throws BadCredentialsException {
-        System.out.println(data);
         String token = userService.login(data.getEmail(), data.getPassword());
         System.out.println("token::" + token);
         Map<Object, Object> model = new HashMap<>();

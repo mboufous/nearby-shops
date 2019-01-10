@@ -12,10 +12,6 @@ public interface IShopService {
 
     List<Shop> getAllShops();
 
-    Long getLikesCount(Long id);
-
-    Long getDislikesCount(Long id);
-
     Shop save(Shop shop);
 
     void deleteShop(Long id);

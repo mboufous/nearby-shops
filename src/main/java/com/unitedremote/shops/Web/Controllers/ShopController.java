@@ -64,22 +64,6 @@ public class ShopController {
     }
 
     /*
-     * Get Number of likes by shop id
-     * */
-    @GetMapping("/{id}/likes")
-    Long getLikesCount(@PathVariable Long id) {
-        return shopService.getLikesCount(id);
-    }
-
-    /*
-     * Get Number of dislikes by shop id
-     * */
-    @GetMapping("/{id}/dislikes")
-    Long getDisLikesCount(@PathVariable Long id) {
-        return shopService.getDislikesCount(id);
-    }
-
-    /*
      * find shop by name
      * */
     @GetMapping("/find/{k}")
