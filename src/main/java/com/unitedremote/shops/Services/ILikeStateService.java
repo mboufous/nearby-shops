@@ -1,4 +1,4 @@
-package com.unitedremote.shops.DAO.Services;
+package com.unitedremote.shops.Services;
 
 import com.unitedremote.shops.DAO.Entities.Shop;
 

@@ -1,7 +1,8 @@
-package com.unitedremote.shops.DAO.Controllers;
+package com.unitedremote.shops.Web.Controllers;
 
+import com.unitedremote.shops.Web.ShopNotFoundException;
 import com.unitedremote.shops.DAO.Entities.Shop;
-import com.unitedremote.shops.DAO.Services.IShopService;
+import com.unitedremote.shops.Services.IShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -66,7 +67,7 @@ public class ShopController {
      * Get Number of likes by shop id
      * */
     @GetMapping("/{id}/likes")
-    Long getLikesCount(@PathVariable Long id){
+    Long getLikesCount(@PathVariable Long id) {
         return shopService.getLikesCount(id);
     }
 
@@ -74,7 +75,7 @@ public class ShopController {
      * Get Number of dislikes by shop id
      * */
     @GetMapping("/{id}/dislikes")
-    Long getDisLikesCount(@PathVariable Long id){
+    Long getDisLikesCount(@PathVariable Long id) {
         return shopService.getDislikesCount(id);
     }
 
@@ -82,7 +83,7 @@ public class ShopController {
      * find shop by name
      * */
     @GetMapping("/find/{k}")
-    List<Shop> findShopByName(@PathVariable String k){
+    List<Shop> findShopByName(@PathVariable String k) {
         return shopService.findShopByName(k);
     }
 

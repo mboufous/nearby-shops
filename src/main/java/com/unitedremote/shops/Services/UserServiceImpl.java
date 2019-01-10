@@ -1,4 +1,4 @@
-package com.unitedremote.shops.DAO.Services;
+package com.unitedremote.shops.Services;
 
 import com.unitedremote.shops.DAO.Entities.LikeState.LikeStateEnum;
 import com.unitedremote.shops.DAO.Entities.LikeState.LikeStateShop;
@@ -8,10 +8,15 @@ import com.unitedremote.shops.DAO.Entities.User;
 import com.unitedremote.shops.DAO.Repositories.LikeStateShopRepository;
 import com.unitedremote.shops.DAO.Repositories.ShopRepository;
 import com.unitedremote.shops.DAO.Repositories.UserRepository;
+import com.unitedremote.shops.security.jwt.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.MethodNotAllowedException;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.el.MethodNotFoundException;
 import java.util.List;
@@ -26,20 +31,29 @@ public class UserServiceImpl implements IUserService, ILikeStateService {
     LikeStateShopRepository likeRepository;
     @Autowired
     ShopRepository shopRepository;
-
+    @Autowired
+    AuthenticationManager authenticationManager;
+    @Autowired
+    JwtTokenProvider jwtTokenProvider;
     @Override
     public User getUser(Long id) {
-        return userRepository.findById(id).get();
+        return userRepository.findById(id).orElseThrow(()->new UsernameNotFoundException("with id:"+id));
     }
 
     @Override
-    public User register(User newUser) {
+    public User save(User newUser) {
         return userRepository.save(newUser);
     }
 
     @Override
-    public User login(String email, String password) {
-        throw new MethodNotFoundException();
+    public String login(String email, String password) {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
+            System.out.println("OK");
+            return jwtTokenProvider.createToken(email, findByUsername(email).orElseThrow(() -> new UsernameNotFoundException("Email " + email + "not found")).getRoles());
+        } catch (AuthenticationException e) {
+            throw new RuntimeException("Invalid username/password.");
+        }
     }
 
     @Override
@@ -50,6 +64,18 @@ public class UserServiceImpl implements IUserService, ILikeStateService {
     @Override
     public User updateUser(Long id, User updatedUser) {
         return userRepository.save(updatedUser);
+    }
+
+    @Override
+    public Optional<User> findByUsername(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public void addRoleToUser(String username, String role) {
+        User user = userRepository.findByEmail(username).orElseThrow(()->new UsernameNotFoundException(username));
+//        if (user.getRoles() == null) System.out.println("NULL");
+        user.getRoles().add(role);
     }
 
     private void likeStateBuilder(Long userId, Long shopId, LikeStateEnum state){
