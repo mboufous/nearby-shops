@@ -13,4 +13,7 @@ public interface ILikeStateService {
     public List<Shop> getLikedShops(Long userId);
 
     public List<Shop> getDislikedShops(Long userId);
+
+    List<Shop> getNotLikedShops(Long userId);
+
 }

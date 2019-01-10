@@ -8,12 +8,16 @@ import com.unitedremote.shops.Web.RegistrationForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,19 +57,21 @@ public class UserController {
                 .email(userForm.getEmail())
                 .name(userForm.getName())
                 .password(encoder.encode(userForm.getPassword()))
+                .roles(Collections.singletonList("USER"))
                 .location(RandomLocationSingleton.getInstance().fetch())
                 .build();
         userService.save(newUser);
-        userService.addRoleToUser(newUser.getUsername(), "USER");
 //        System.out.println(newUser);
         return newUser;
     }
 
-    @GetMapping("/me")
-    public ResponseEntity currentUser(@AuthenticationPrincipal UserDetails userDetails) {
+    @PostMapping("/me")
+    public ResponseEntity currentUser(@AuthenticationPrincipal Authentication authentication) {
         Map<Object, Object> model = new HashMap<>();
-        model.put("username", userDetails.getUsername());
-        model.put("roles", userDetails.getAuthorities()
+        User u = (User)authentication.getPrincipal();
+        model.put("id", u.getId());
+        model.put("username", u.getUsername());
+        model.put("roles", u.getAuthorities()
                 .stream()
                 .map(a -> ((GrantedAuthority) a).getAuthority())
                 .collect(toList())

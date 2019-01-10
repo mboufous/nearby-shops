@@ -19,6 +19,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.el.MethodNotFoundException;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,10 +74,10 @@ public class UserServiceImpl implements IUserService, ILikeStateService {
     }
 
     @Override
-    public void addRoleToUser(String username, String role) {
-        User user = userRepository.findByEmail(username).orElseThrow(()->new UsernameNotFoundException(username));
+    public void addRoleToUser(String email, String role) {
+        User user = userRepository.findByEmail(email).orElseThrow(()->new UsernameNotFoundException(email));
 //        if (user.getRoles() == null) System.out.println("NULL");
-        user.getRoles().add(role);
+        user.setRoles(Collections.singletonList("USER"));
     }
 
     private void likeStateBuilder(Long userId, Long shopId, LikeStateEnum state){
@@ -99,11 +101,16 @@ public class UserServiceImpl implements IUserService, ILikeStateService {
 
     @Override
     public List<Shop> getLikedShops(Long userId) {
-        return shopRepository.findShopByUserIdAndLikeState(userId, LikeStateEnum.Like);
+        return shopRepository.findShopsByUserIdAndLikeState(userId, LikeStateEnum.Like);
     }
 
     @Override
     public List<Shop> getDislikedShops(Long userId) {
-        return shopRepository.findShopByUserIdAndLikeState(userId, LikeStateEnum.Dislike);
+        return shopRepository.findShopsByUserIdAndLikeState(userId, LikeStateEnum.Dislike);
+    }
+
+    @Override
+    public List<Shop> getNotLikedShops(Long userId) {
+        return shopRepository.findShopsNotCurrentLikeState(userId, LikeStateEnum.Like);
     }
 }

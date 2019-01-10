@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface LikeStateShopRepository extends JpaRepository<LikeStateShop, Long> {
     Long countByShopIdAndLikeState(Long shopId, LikeStateEnum likeState);
 
+
 }

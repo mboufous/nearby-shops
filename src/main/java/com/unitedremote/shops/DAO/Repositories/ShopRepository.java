@@ -14,5 +14,9 @@ public interface ShopRepository extends JpaRepository<Shop, Long> {
     List<Shop> findByNameContainingIgnoreCase(@Param("k") String keyword);
 
     @Query("SELECT l.shop FROM LikeStateShop l where l.user.id=?1 AND l.likeState = ?2")
-    List<Shop> findShopByUserIdAndLikeState(Long userId, LikeStateEnum likeState);
+    List<Shop> findShopsByUserIdAndLikeState(Long userId, LikeStateEnum likeState);
+
+    @Query("SELECT l.shop FROM LikeStateShop l where l.user.id=?1 AND l.likeState != ?2")
+    List<Shop> findShopsNotCurrentLikeState(Long userId, LikeStateEnum currentLikeState);
+
 }

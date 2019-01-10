@@ -18,4 +18,5 @@ public interface IUserService {
     Optional<User> findByUsername(String username);
 
     void addRoleToUser(String username, String Role);
+
 }
