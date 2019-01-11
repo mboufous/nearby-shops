@@ -73,5 +73,10 @@ public class UserLikeStateController {
         likeStateService.dislikeShop(connectedUser.getAuthUser().getId(), id);
     }
 
+    @DeleteMapping("/like/{id}")
+    public void removeLikeShop(@PathVariable Long id) {
+        likeStateService.removeLikeShop(connectedUser.getAuthUser().getId(), id);
+    }
+
 
 }

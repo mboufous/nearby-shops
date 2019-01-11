@@ -20,4 +20,6 @@ public interface ILikeStateService {
 
     Long getDislikesCount(Long shopId);
 
+    void removeLikeShop(Long userId, Long shopId);
+
 }

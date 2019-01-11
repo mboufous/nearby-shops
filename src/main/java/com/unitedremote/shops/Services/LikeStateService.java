@@ -62,6 +62,11 @@ public class LikeStateService implements ILikeStateService {
     }
 
     @Override
+    public void removeLikeShop(Long userId, Long shopId) {
+        likeRepository.deleteById(new LikeStateShopPrimaryKey(userId, shopId));
+    }
+
+    @Override
     public List<Shop> getNotLikedShops(Long userId) {
         return shopRepository.findShopsNotCurrentLikeState(userId, LikeStateEnum.Like);
     }

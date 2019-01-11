@@ -52,13 +52,16 @@ public class ShopsApplication {
 //            userRepository.findAll().forEach(System.out::println);
 //            shopRepository.findAll().forEach(System.out::println);
 //
-//            likeStateService.likeShop(1L, 5L);
+            likeStateService.likeShop(1L, 5L);
 //            likeStateService.likeShop(2L, 5L);
 //            likeStateService.likeShop(3L, 5L);
-//            likeStateService.likeShop(1L, 6L);
+            likeStateService.likeShop(1L, 6L);
 //            likeStateService.dislikeShop(1L, 7L);
 //            likeStateService.likeShop(2L, 5L);
             //System.out.println(nearbyShopsService.getNearbyShops());
+            System.out.println(likeStateService.getLikedShops(1L));
+            likeStateService.removeLikeShop(1L, 5L);
+            System.out.println(likeStateService.getLikedShops(1L));
 
 
 
