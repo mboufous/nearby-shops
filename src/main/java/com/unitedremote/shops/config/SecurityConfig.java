@@ -29,14 +29,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests().antMatchers("/h2-console/**").permitAll()
-                .and()
-                .headers().frameOptions().disable()
-                .and()
-                .csrf().ignoringAntMatchers("/h2-console/**")
-                .and()
-                .cors().disable();
-        http
                 .httpBasic().disable()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

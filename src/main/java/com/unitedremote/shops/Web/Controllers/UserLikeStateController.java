@@ -30,8 +30,6 @@ public class UserLikeStateController {
 
     @GetMapping("/like")
     public List<Shop> userLikedShops() {
-        System.out.println("connected id::" + connectedUser.getAuthUser().getId());
-        System.out.println(likeStateService.getLikedShops(1L));
         return likeStateService.getLikedShops(connectedUser.getAuthUser().getId());
     }
 

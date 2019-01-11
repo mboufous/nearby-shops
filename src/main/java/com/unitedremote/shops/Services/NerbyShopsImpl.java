@@ -21,6 +21,8 @@ public class NerbyShopsImpl implements INearbyShopsService {
     @Autowired
     IShopService shopService;
     @Autowired
+    ILikeStateService likeStateService;
+    @Autowired
     PrincipalUser principalUser;
 
     private Double calculateDistance(Location a, Location b){
@@ -30,7 +32,9 @@ public class NerbyShopsImpl implements INearbyShopsService {
 
     @Override
     public List<Shop> getNearbyShops() {
-        List<Shop> shops = shopService.getAllShops();
+//        List<Shop> shops = shopService.getAllShops();
+        List<Shop> shops = likeStateService.getNotLikedShops(principalUser.getAuthUser().getId());
+        System.out.println(shops);
         List<Shop> ns = shops.stream()
                 .sorted(Comparator.comparingDouble(shop -> calculateDistance(shop.getLocation(), principalUser.getAuthUser().getLocation())))
                 .collect(toList());
