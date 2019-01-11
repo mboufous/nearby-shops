@@ -6,5 +6,5 @@ import com.unitedremote.shops.DAO.Entities.Shop;
 import java.util.List;
 
 public interface INearbyShopsService {
-    List<Shop> getNearbyShops(Location location);
+    List<Shop> getNearbyShops();
 }

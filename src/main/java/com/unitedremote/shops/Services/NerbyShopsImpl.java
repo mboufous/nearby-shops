@@ -3,7 +3,10 @@ package com.unitedremote.shops.Services;
 import com.unitedremote.shops.DAO.Entities.Location;
 import com.unitedremote.shops.DAO.Entities.Shop;
 import com.unitedremote.shops.DAO.Entities.User;
+import com.unitedremote.shops.Utils.PrincipalUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
@@ -18,19 +21,19 @@ public class NerbyShopsImpl implements INearbyShopsService {
     @Autowired
     IShopService shopService;
     @Autowired
-    IUserService userService;
+    PrincipalUser principalUser;
 
     private Double calculateDistance(Location a, Location b){
         return Math.sqrt(Math.pow(a.getLat() - b.getLat() , 2) + Math.pow(a.getLon() - b.getLon() , 2) );
     }
 
+
     @Override
-    public List<Shop> getNearbyShops(Location userLocation) {
+    public List<Shop> getNearbyShops() {
         List<Shop> shops = shopService.getAllShops();
         List<Shop> ns = shops.stream()
-                .sorted(Comparator.comparingDouble(shop -> calculateDistance(shop.getLocation(), userLocation)))
+                .sorted(Comparator.comparingDouble(shop -> calculateDistance(shop.getLocation(), principalUser.getAuthUser().getLocation())))
                 .collect(toList());
         return ns;
-
     }
 }

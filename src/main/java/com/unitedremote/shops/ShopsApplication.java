@@ -58,7 +58,7 @@ public class ShopsApplication {
 //            likeStateService.likeShop(1L, 6L);
 //            likeStateService.dislikeShop(1L, 7L);
 //            likeStateService.likeShop(2L, 5L);
-//            System.out.println(nearbyShopsService.getNearbyShops(2L));
+            //System.out.println(nearbyShopsService.getNearbyShops());
 
 
 
